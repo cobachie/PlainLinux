@@ -6,6 +6,8 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <errno.h>
+#include <string.h>
 
 static void do_cat(const char *path);
 static void die(const char *s);
@@ -53,5 +55,6 @@ static void do_cat(const char *path)
 static void die(const char *s)
 {
   perror(s);
+  fprintf(stderr, "%s: %s", s, strerror(errno));
   exit(1);
 }
